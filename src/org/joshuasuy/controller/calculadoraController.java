@@ -38,9 +38,9 @@ public class calculadoraController {
                 if (operador.equals("+")){ 
                     opcion1 = resultadoSuma(opcion1, opcion2);
                 }else if (operador.equals("-")){ 
-//                    opcion1 = resultadoResta(opcion1, opcion2); 
-//                }else if (operador.equals("*")){
-//                    opcion1 = resultadoMultiplicacion(opcion1, opcion2); 
+                    opcion1 = resultadoResta(opcion1, opcion2); 
+                }else if (operador.equals("*")){
+                    opcion1 = resultadoMultiplicacion(opcion1, opcion2); 
 //                }else if(operador.equals("/")){
 //                    if (opcion2.equals("0")){
 //                        opcion1 = "ERROR"; 
@@ -78,15 +78,15 @@ private String resultadoResta(String numeroUno, String numeroDos) {
     int resta = datoUno - datoDos;
     return String.valueOf(resta);
 }
+
+private String resultadoMultiplicacion(String numeroUno, String numeroDos) {
+    int datoUno = Integer.parseInt(numeroUno);
+    int datoDos = Integer.parseInt(numeroDos);
+    int multiplicacion = datoUno * datoDos;
+    return String.valueOf(multiplicacion);
+}
 }
 
-//private String resultadoMultiplicacion(String numeroUno, String numeroDos) {
-//    int datoUno = Integer.parseInt(numeroUno);
-//    int datoDos = Integer.parseInt(numeroDos);
-//    int multiplicacion = datoUno * datoDos;
-//    return String.valueOf(multiplicacion);
-//}
-//
 //private String resultadoDivision(String numeroUno, String numeroDos) {
 //    int datoUno = Integer.parseInt(numeroUno);
 //    int datoDos = Integer.parseInt(numeroDos);
