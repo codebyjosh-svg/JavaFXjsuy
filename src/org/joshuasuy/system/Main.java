@@ -21,11 +21,16 @@ public class Main extends Application {
         Pane raiz = new Pane(calculadora.getView());
 
         //esecna(ndodRaiz, ancho, largo)
-        Scene escena = new Scene(raiz, 266, 390);
+        Scene escena = new Scene(raiz, 300, 420);
 
         //cargar escene y mostrar escenario principal 
         escenarioPrincipal.setTitle("Calculadora de Joshua");
         escenarioPrincipal.setScene(escena);
+        escenarioPrincipal.setResizable(false);
         escenarioPrincipal.show();
     }
-}
+    
+//    public static void main(String[] args){
+//        launch(args);
+    }
+

@@ -25,14 +25,14 @@ public class CalculadoraView {
         
         //Contenedor principal, usado como nodo raiz
         view = new VBox(15);
-        view.setPadding(new Insets(15));
+        view.setPadding(new Insets(20));
         view.setAlignment(Pos.CENTER_LEFT);
         view.setStyle("-fx-background-color: #10494F;");
         
         pantalla = new Label("0");
         pantalla.setFont(Font.font("Consola", FontWeight.BOLD, 40));
         pantalla.setAlignment(Pos.CENTER_RIGHT);
-        pantalla.setPrefSize(235, 50);
+        pantalla.setPrefSize(250, 70);
         pantalla.setStyle("-fx-background-color: #9EE3EB;");
         
         cuadroBotones = new GridPane ();
@@ -41,20 +41,64 @@ public class CalculadoraView {
         cuadroBotones.setAlignment(Pos.CENTER);//alineado al centro
         
         //crear el primer botton -- instanciar new
-        Button btnUno = nuevoBoton("1");
-          Button btnDos = nuevoBoton("2");
-          Button btnTres = nuevoBoton("3");
-          Button btnMas = nuevoBoton("+");
-          Button btnIgual = nuevoBoton("=");
-          Button btnClear = nuevoBoton("C");
+        //fila 0: Nuevos operadores y Division
+        Button btnRaiz = nuevoBoton("√");
+        Button btnPot = nuevoBoton("^");
+        Button btnPorc = nuevoBoton("%");
+        Button btnDiv = nuevoBoton("/");
+
+        cuadroBotones.add(btnRaiz, 0, 0);
+        cuadroBotones.add(btnPot, 1, 0);
+        cuadroBotones.add(btnPorc, 2, 0);
+        cuadroBotones.add(btnDiv, 3, 0);
+
+        //Fila 1: Numeros y multiplicacion
+          Button btnSiete = nuevoBoton("7");
+        Button btnOcho = nuevoBoton("8");
+        Button btnNueve = nuevoBoton("9");
+        Button btnMult = nuevoBoton("*");
+
+        cuadroBotones.add(btnSiete, 0, 1);
+        cuadroBotones.add(btnOcho, 1, 1);
+        cuadroBotones.add(btnNueve, 2, 1);
+        cuadroBotones.add(btnMult, 3, 1);
         
-        //agregarlo al cuadroBotones
-         cuadroBotones.add(btnUno, 0, 3);
-         cuadroBotones.add(btnDos, 1, 3);
-         cuadroBotones.add(btnTres, 2, 3);
-         cuadroBotones.add(btnMas, 3, 3);
-         cuadroBotones.add(btnIgual, 3, 4);
+        //Fila 2: Numeros y menos
+        Button btnCuatro = nuevoBoton("4");
+        Button btnCinco = nuevoBoton("5");
+        Button btnSeis = nuevoBoton("6");
+        Button btnMenos = nuevoBoton("-");
+        
+        cuadroBotones.add(btnCuatro, 0, 2);
+        cuadroBotones.add(btnCinco, 1, 2);
+        cuadroBotones.add(btnSeis, 2, 2);
+        cuadroBotones.add(btnMenos, 3, 2);
+        
+        //fila 3:  Numeros y suma
+        Button btnUno = nuevoBoton("1");
+        Button btnDos = nuevoBoton("2");
+        Button btnTres = nuevoBoton("3");
+        Button btnMas = nuevoBoton("+");
+
+        cuadroBotones.add(btnUno, 0, 3);
+        cuadroBotones.add(btnDos, 1, 3);
+        cuadroBotones.add(btnTres, 2, 3);
+        cuadroBotones.add(btnMas, 3, 3);
+
+        //fila 4: Limpiar, Cero y el boton Igual
+        Button btnIgual = nuevoBoton("=");
+        Button btnClear = nuevoBoton("C");
+        Button btnCero = nuevoBoton("0");
+        
+        btnIgual.setPrefSize(115, 55);
+        GridPane.setColumnSpan(btnIgual, 2);
+
+        cuadroBotones.add(btnIgual, 2, 4);
         cuadroBotones.add(btnClear, 0, 4);
+        cuadroBotones.add(btnCero, 1, 4);
+
+          
+        //agregarlo al cuadroBotones
         
         view.getChildren().addAll(pantalla, cuadroBotones);
     }
