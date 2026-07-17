@@ -12,7 +12,6 @@ public class Main extends Application {
         System.out.println("Hola Mundo");
         launch(args);
     }
-    private Scene escena;
 
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {

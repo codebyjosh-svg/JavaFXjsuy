@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.joshuasuy.controller.calculadoraController;
 
 
 public class CalculadoraView {
@@ -17,17 +18,22 @@ public class CalculadoraView {
     private Label pantalla;
     private GridPane cuadroBotones;
     //controller
+    private calculadoraController controller;
     
     public CalculadoraView(){
+        controller = new calculadoraController();
+        
+        //Contenedor principal, usado como nodo raiz
         view = new VBox(15);
         view.setPadding(new Insets(15));
-        view.setAlignment(Pos.CENTER);
+        view.setAlignment(Pos.CENTER_LEFT);
         view.setStyle("-fx-background-color: #10494F;");
         
         pantalla = new Label("0");
         pantalla.setFont(Font.font("Consola", FontWeight.BOLD, 40));
         pantalla.setAlignment(Pos.CENTER_RIGHT);
         pantalla.setPrefSize(235, 50);
+        pantalla.setStyle("-fx-background-color: #9EE3EB;");
         
         cuadroBotones = new GridPane ();
         cuadroBotones.setHgap(12);
@@ -35,68 +41,22 @@ public class CalculadoraView {
         cuadroBotones.setAlignment(Pos.CENTER);//alineado al centro
         
         //crear el primer botton -- instanciar new
-        Button btnUno = new Button("1");
-        
-        //tamaño(ancho y alto)
-        btnUno.setPrefSize(50, 50);
-        //agregamos un estilo
-        btnUno.setStyle("-fx-background-color: #1C7D87; -fx-text-fill:white; -ft-background-radius:5px");
-        //al precionarse
-        btnUno.setOnMousePressed(e ->{
-            //cambiando el fonod
-            btnUno.setStyle("-fx-background-color: #24A0AE;");
-            //moviendo en el eje Y 2px
-            btnUno.setTranslateY(2);
-    });
-        //al soltar el click
-        btnUno.setOnMouseReleased(e -> {
-            //retornar el color de fondo al original
-            btnUno.setStyle("-fx-background-color: #1C7D87;");
-            btnUno.setTranslateY(0);
-        });
-        
-        btnUno.setFont(Font.font("Consolas", FontWeight.BOLD, 20));
-        
-          Button btnDos = new Button("2");
-        btnDos.setPrefSize(50, 50);
-        btnDos.setStyle("-fx-background-color: #1C7D87; -fx-text-fill:white; -ft-background-radius:5px");
-            btnDos.setOnMousePressed(e -> {
-            btnDos.setStyle("-fx-background-color: #24A0AE;");
-            btnDos.setTranslateY(2);
-    });   
-        btnDos.setOnMouseReleased(e -> {
-            btnDos.setStyle("-fx-background-color: #1C7D87;");
-            btnDos.setTranslateY(0);    
-
-        });
-        
-        btnDos.setFont(Font.font("Consolas", FontWeight.BOLD, 20));
-        
-        
-          Button btnTres = new Button("3");
-        btnTres.setPrefSize(50, 50);
-        btnTres.setStyle("-fx-background-color: #1C7D87; -fx-text-fill:white; -ft-background-radius:5px");
-            btnTres.setOnMousePressed(e -> {
-            btnTres.setStyle("-fx-background-color: #24A0AE;");
-            btnTres.setTranslateY(2);
-            });        
-        btnTres.setOnMouseReleased(e -> {
-            btnTres.setStyle("-fx-background-color: #1C7D87;");
-            btnTres.setTranslateY(0);      
-            });
-        btnTres.setFont(Font.font("Consolas", FontWeight.BOLD, 20));
-        
-        Button btnMas = new Button("+");
-        btnMas.setPrefSize(50, 50);
-        
+        Button btnUno = nuevoBoton("1");
+          Button btnDos = nuevoBoton("2");
+          Button btnTres = nuevoBoton("3");
+          Button btnMas = nuevoBoton("+");
+          Button btnIgual = nuevoBoton("=");
+          Button btnClear = nuevoBoton("C");
         
         //agregarlo al cuadroBotones
-        cuadroBotones.add(btnUno, 0, 3);
-        cuadroBotones.add(btnDos, 1, 3);
-        cuadroBotones.add(btnTres, 2, 3);
-        cuadroBotones.add(btnMas, 3, 3);
+         cuadroBotones.add(btnUno, 0, 3);
+         cuadroBotones.add(btnDos, 1, 3);
+         cuadroBotones.add(btnTres, 2, 3);
+         cuadroBotones.add(btnMas, 3, 3);
+         cuadroBotones.add(btnIgual, 3, 4);
+        cuadroBotones.add(btnClear, 0, 4);
         
-        view.getChildren().addAll(pantalla,cuadroBotones);
+        view.getChildren().addAll(pantalla, cuadroBotones);
     }
     public VBox getView(){
         return view;
@@ -105,10 +65,22 @@ public class CalculadoraView {
     private Button nuevoBoton(String texto){
         
         Button btn = new Button(texto);
-        
-        
         //configuracion de boton
         //tamaño, el estilo, sus funciones
+        btn.setPrefSize(50, 50);
+        btn.setStyle("-fx-background-color: #1C7D87; -fx-text-fill: white; -fx-background-radius:5px; -fx-cursor: hand;");
+        
+        btn.setOnMousePressed(e -> {
+    btn.setStyle("-fx-background-color: #24A0AE; -fx-text-fill: white; -fx-background-radius:5px; -fx-cursor: hand;");
+    btn.setTranslateY(2);
+});
+
+btn.setOnMouseReleased(e -> {
+    btn.setStyle("-fx-background-color: #1C7D87; -fx-text-fill: white; -fx-background-radius:5px; -fx-cursor: hand;");
+    btn.setTranslateY(0);
+});
+    
+        btn.setOnAction(e -> controller.procesoDeEntrada(texto, pantalla));
         return btn;
     }
 }
