@@ -71,14 +71,15 @@ private String resultadoSuma(String numeroUno, String numeroDos) {
     int suma = datoUno + datoDos;
     return String.valueOf(suma);
 }
+
+private String resultadoResta(String numeroUno, String numeroDos) {
+    int datoUno = Integer.parseInt(numeroUno);
+    int datoDos = Integer.parseInt(numeroDos);
+    int resta = datoUno - datoDos;
+    return String.valueOf(resta);
 }
-//private String resultadoResta(String numeroUno, String numeroDos) {
-//    int datoUno = Integer.parseInt(numeroUno);
-//    int datoDos = Integer.parseInt(numeroDos);
-//    int resta = datoUno - datoDos;
-//    return String.valueOf(resta);
-//}
-//
+}
+
 //private String resultadoMultiplicacion(String numeroUno, String numeroDos) {
 //    int datoUno = Integer.parseInt(numeroUno);
 //    int datoDos = Integer.parseInt(numeroDos);
