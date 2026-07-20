@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 public class calculadoraController {
 
     private String opcion1 = "";
-    private String operador = "";
+    private String operador = ""; 
     private String opcion2 = "";
     private boolean calculoTerminado = false;
 
