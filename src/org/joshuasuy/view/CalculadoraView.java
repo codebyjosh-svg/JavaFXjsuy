@@ -42,7 +42,7 @@ public class CalculadoraView {
         
         //crear el primer botton -- instanciar new
         //fila 0: Nuevos operadores y Division
-        Button btnRaiz = nuevoBoton("√");
+        Button btnRaiz = nuevoBoton("\u221A");
         Button btnPot = nuevoBoton("^");
         Button btnPorc = nuevoBoton("%");
         Button btnDiv = nuevoBoton("/");

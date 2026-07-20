@@ -13,52 +13,65 @@ public class calculadoraController {
 
     }
 
-    public void procesoDeEntrada(String entrada, Label pantalla) {
-        if (entrada.equals("C")){
-            opcion1 = "";
+  public void procesoDeEntrada(String entrada, Label pantalla) {
+    if (entrada.equals("C")) {
+        opcion1 = "";
+        operador = "";
+        opcion2 = "";
+        pantalla.setText("");
+        return;
+    }
+    calculoTerminado = false;
+
+    if (entrada.matches("[0-9]")) {
+        if (operador.isEmpty() || operador.equals("\u221A")) {
+            opcion1 += entrada;
+        } else {
+            opcion2 += entrada;
+        }
+        actualizarPantalla(pantalla);
+
+    } else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) {
+        operador = entrada;
+        actualizarPantalla(pantalla);
+
+    } else if (entrada.equals("\u221A")) {
+        operador = "\u221A";
+        actualizarPantalla(pantalla);
+
+    } else if (entrada.equals("=")) {
+        if (operador.equals("\u221A") && !opcion1.isEmpty()) {
+            opcion1 = resultadoRaiz(opcion1);
             operador = "";
             opcion2 = "";
-            pantalla.setText("");
-            return;
-         }
-        calculoTerminado = false; 
-        
-        if  (entrada.matches("[0-9]")){
-            if (operador.isEmpty()) {
-               opcion1 += entrada;                
-            }else { 
-                opcion2 += entrada; 
-            } 
-            actualizarPantalla(pantalla);
-        }else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) {
-            operador = entrada; 
-            actualizarPantalla(pantalla);
-        }else if (entrada.equals("=")){ 
-            if (!opcion1.isEmpty() && !opcion2.isEmpty()) {           
-                if (operador.equals("+")){ 
-                    opcion1 = resultadoSuma(opcion1, opcion2);
-                }else if (operador.equals("-")){ 
-                    opcion1 = resultadoResta(opcion1, opcion2); 
-                }else if (operador.equals("*")){
-                    opcion1 = resultadoMultiplicacion(opcion1, opcion2); 
-                }else if(operador.equals("/")){
-                    if (opcion2.equals("0")){
-                        opcion1 = "ERROR"; 
-                    } else {
-                        opcion1 = resultadoDivision(opcion1, opcion2); 
-                    }
+            calculoTerminado = true;
+
+        } else if (!opcion1.isEmpty() && !opcion2.isEmpty()) {
+            if (operador.equals("+")) {
+                opcion1 = resultadoSuma(opcion1, opcion2);
+            } else if (operador.equals("-")) {
+                opcion1 = resultadoResta(opcion1, opcion2);
+            } else if (operador.equals("*")) {
+                opcion1 = resultadoMultiplicacion(opcion1, opcion2);
+            } else if (operador.equals("/")) {
+                if (opcion2.equals("0")) {
+                    opcion1 = "ERROR";
+                } else {
+                    opcion1 = resultadoDivision(opcion1, opcion2);
                 }
-                operador = ""; 
-                opcion2 = ""; 
-                calculoTerminado = true; 
-            } // CORREGIDO: Cierre correcto de la condición de campos no vacíos
-            actualizarPantalla(pantalla);
-       
+            }
+            operador = "";
+            opcion2 = "";
+            calculoTerminado = true;
+        }
+        actualizarPantalla(pantalla);
     }
 }
-
-   private void actualizarPantalla(Label pantalla) {
-    if (operador.isEmpty()) {
+  
+ private void actualizarPantalla(Label pantalla) {
+    if (operador.equals("\u221A")) {
+        pantalla.setText("\u221A" + opcion1);
+    } else if (operador.isEmpty()) {
         pantalla.setText(opcion1);
     } else {
         pantalla.setText(opcion1 + " " + operador + " " + opcion2);
@@ -93,4 +106,11 @@ private String resultadoDivision(String numeroUno, String numeroDos) {
     int division = datoUno / datoDos;
     return String.valueOf(division);
 }
+
+    private String resultadoRaiz(String numeroUno) {
+       int datoUno = Integer.parseInt(numeroUno);
+       double raiz = Math.sqrt(datoUno);
+       return String.valueOf(raiz);
+       
+    }
 }
