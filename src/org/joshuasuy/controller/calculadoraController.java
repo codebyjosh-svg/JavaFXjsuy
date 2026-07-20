@@ -24,7 +24,7 @@ public class calculadoraController {
     calculoTerminado = false;
 
     if (entrada.matches("[0-9]")) {
-        if (operador.isEmpty() || operador.equals("\u221A")) {
+        if (operador.isEmpty() || operador.equals("\u221A") || operador.equals("%")) {
             opcion1 += entrada;
         } else {
             opcion2 += entrada;
@@ -38,6 +38,10 @@ public class calculadoraController {
     } else if (entrada.equals("\u221A")) {
         operador = "\u221A";
         actualizarPantalla(pantalla);
+        
+    }else if (entrada.equals("%")){
+        operador ="%";
+        actualizarPantalla(pantalla);
 
     } else if (entrada.equals("=")) {
         if (operador.equals("\u221A") && !opcion1.isEmpty()) {
@@ -45,6 +49,12 @@ public class calculadoraController {
             operador = "";
             opcion2 = "";
             calculoTerminado = true;
+            
+        }else if (operador.equals("%") && !opcion1.isEmpty()){
+            opcion1 = resultadoPorcentaje(opcion1);
+            operador = "";
+            opcion2 = "";
+            calculoTerminado =true;
 
         } else if (!opcion1.isEmpty() && !opcion2.isEmpty()) {
             if (operador.equals("+")) {
@@ -73,6 +83,8 @@ public class calculadoraController {
  private void actualizarPantalla(Label pantalla) {
     if (operador.equals("\u221A")) {
         pantalla.setText("\u221A" + opcion1);
+    }else if (operador.equals("%")){
+        pantalla.setText(opcion1 + "%");
     } else if (operador.isEmpty()) {
         pantalla.setText(opcion1);
     } else {
@@ -121,5 +133,11 @@ private String resultadoDivision(String numeroUno, String numeroDos) {
         int datoDos = Integer.parseInt(numeroDos);
         double potencia = Math.pow(datoUno, datoDos);
         return String.valueOf(potencia);
+    }
+    
+    private String resultadoPorcentaje(String numeroUno){
+        int datoUno = Integer.parseInt(numeroUno);
+        double porcentaje = datoUno / 100.0;
+        return String.valueOf(porcentaje);
     }
 }
