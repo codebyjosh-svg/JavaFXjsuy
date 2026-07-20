@@ -31,7 +31,7 @@ public class calculadoraController {
         }
         actualizarPantalla(pantalla);
 
-    } else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/")) {
+    } else if (entrada.equals("+") || entrada.equals("-") || entrada.equals("*") || entrada.equals("/") || entrada.equals("^")) {
         operador = entrada;
         actualizarPantalla(pantalla);
 
@@ -59,6 +59,8 @@ public class calculadoraController {
                 } else {
                     opcion1 = resultadoDivision(opcion1, opcion2);
                 }
+            }else if (operador.equals("^")){
+                opcion1 = resultadoPotencia(opcion1, opcion2);
             }
             operador = "";
             opcion2 = "";
@@ -112,5 +114,12 @@ private String resultadoDivision(String numeroUno, String numeroDos) {
        double raiz = Math.sqrt(datoUno);
        return String.valueOf(raiz);
        
+    }
+    
+    private String resultadoPotencia(String numeroUno, String numeroDos){
+        int datoUno = Integer.parseInt(numeroUno);
+        int datoDos = Integer.parseInt(numeroDos);
+        double potencia = Math.pow(datoUno, datoDos);
+        return String.valueOf(potencia);
     }
 }
